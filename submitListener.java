@@ -24,6 +24,8 @@ class submitListener implements ActionListener{
 				
 				BufferedWriter bw = new BufferedWriter(new FileWriter(obj.userFile1));
 				bw.write(obj.rUp.getText());
+				bw.write("\n");
+				bw.write("//Made using CodeMagnet");
 				bw.close();
 			}
 			catch (Exception e1) {
@@ -34,6 +36,8 @@ class submitListener implements ActionListener{
 				
 				BufferedWriter bw = new BufferedWriter(new FileWriter(obj.userFile2));
 				bw.write(obj.rDown.getText());
+				bw.write("\n");
+				bw.write("//Made using CodeMagnet");
 				bw.close();
 			}
 			catch (Exception e2) {

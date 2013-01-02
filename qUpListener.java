@@ -68,20 +68,20 @@ class qUpListener implements ActionListener{
                 obj.lUpScroller.setVisible(false);
                 obj.lDownScroller.setVisible(false);
                	
-               	while(obj.userName==null || obj.userName=="")
+               	while(obj.userName==null || obj.userName.trim().isEmpty())
                		obj.userName=(String)JOptionPane.showInputDialog(obj.frame, "Enter you full Name", "Code Magnet", JOptionPane.INFORMATION_MESSAGE, null, null, null);
         
                	obj.userName=obj.userName.replaceAll("\\s", "_");
             		
                	if(obj.rUp.getSyntaxEditingStyle()==SyntaxConstants.SYNTAX_STYLE_JAVA)
-               		obj.userFile1 = new File(System.getProperty("user.dir"),obj.userName+".java");
+               		obj.userFile1 = new File(System.getProperty("user.dir"),obj.userName+"1.java");
 				else 
-					obj.userFile1 = new File(System.getProperty("user.dir"),obj.userName+".cpp");
+					obj.userFile1 = new File(System.getProperty("user.dir"),obj.userName+"1.cpp");
                
                	if(obj.rDown.getSyntaxEditingStyle()==SyntaxConstants.SYNTAX_STYLE_JAVA)
-               		obj.userFile2 = new File(System.getProperty("user.dir"),obj.userName+".java");
+               		obj.userFile2 = new File(System.getProperty("user.dir"),obj.userName+"2.java");
 				else 
-					obj.userFile2 = new File(System.getProperty("user.dir"),obj.userName+".cpp");
+					obj.userFile2 = new File(System.getProperty("user.dir"),obj.userName+"2.cpp");
                
                	obj.timer.start();
                	obj.lDownScroller.setVisible(true);

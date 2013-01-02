@@ -53,8 +53,10 @@ public class Main{
 	
 	JTextArea area[]=new JTextArea[maxLabels];
 	
-	RSTA rUp=new RSTA(3,53);
-	RSTA rDown=new RSTA(5,53);
+	//RSTA rUp=new RSTA(3,53);
+	//RSTA rDown=new RSTA(5,53);
+	RSTA rUp=new RSTA(3,54);
+	RSTA rDown=new RSTA(5,54);
 	
 	JScrollPane lUpScroller = new JScrollPane(output);
 	JScrollPane lDownScroller = new JScrollPane(panel);  
@@ -69,7 +71,7 @@ public class Main{
 		new Main().go();
 	}
 	void go(){
-		
+		System.out.println("Working Directory: "+System.getProperty("user.dir"));
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
@@ -94,15 +96,19 @@ public class Main{
 		lDownScroller.getVerticalScrollBar().setUnitIncrement(36);
 		lDownScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		rUp.setFont(new Font("Courier New",Font.PLAIN,14));
+		//rUp.setFont(new Font("Courier New",Font.PLAIN,14));
+		rUp.setFont(new Font("Monospaced",Font.PLAIN,14));
 		rUp.setAnimateBracketMatching(true);
 		rUp.setAutoIndentEnabled(true);
 		rUp.setText("//First question goes here\n");
+		rUp.setCloseCurlyBraces(false);
 		
 		rDown.setAnimateBracketMatching(true);
 		rDown.setAutoIndentEnabled(true);
-		rDown.setFont(new Font("Courier New",Font.PLAIN,14));
+		//rDown.setFont(new Font("Courier New",Font.PLAIN,14));
+		rDown.setFont(new Font("Monospaced",Font.PLAIN,14));
 		rDown.setText("//Second question goes here\n");
+		rDown.setCloseCurlyBraces(false);
 
 		rUpscroller.getVerticalScrollBar().setUnitIncrement(16);
 		rDownscroller.getVerticalScrollBar().setUnitIncrement(16);		
@@ -116,17 +122,20 @@ public class Main{
 		
 		output.setEditable(false);
     	output.setDragEnabled(false);
-    	output.setFont(new Font("Courier New",Font.BOLD,16));
+    	//output.setFont(new Font("Courier New",Font.BOLD,16));
+    	output.setFont(new Font("Monospaced",Font.BOLD,14));
     	
     	DefaultCaret caret1 = (DefaultCaret)output.getCaret();
 		caret1.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
     	
 		for(int i=0;i<maxLabels;i++){
 			
-			area[i]=new JTextArea(3,55);
+			//area[i]=new JTextArea(3,55);
+			area[i]=new JTextArea(3,53);
 			DefaultCaret caret = (DefaultCaret)area[i].getCaret();
 			caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
-			area[i].setFont(new Font("Courier New",Font.PLAIN,14));
+			//area[i].setFont(new Font("Courier New",Font.PLAIN,14));
+			area[i].setFont(new Font("Monospaced",Font.PLAIN,14));
 			area[i].setLineWrap(true);
 			area[i].setWrapStyleWord(true);
 	    	area[i].setEditable(false);
@@ -167,13 +176,13 @@ public class Main{
 		menuBar.add(optionMenu);
 		frame.setLocation(30,5);
 	//	frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setSize(950, 720);
 		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setJMenuBar(menuBar);
-	
-		frame.getContentPane().add(BorderLayout.EAST,leftPanel);
-		frame.getContentPane().add(BorderLayout.WEST,rightPanel);
+		frame.addWindowListener(new myWindowListener(this));
+		frame.getContentPane().add(BorderLayout.WEST,leftPanel);
+		frame.getContentPane().add(BorderLayout.EAST,rightPanel);
 		frame.setVisible(true);
 		frame.setResizable(false);
 	}
